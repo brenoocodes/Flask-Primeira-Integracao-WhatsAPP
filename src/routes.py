@@ -1,7 +1,7 @@
 import os
 import json
+from flask import jsonify, request, send_from_directory
 from src.config import app, verify_token
-from flask import jsonify, request
 
 # Define the directory to save the JSON files
 SAVE_DIR = 'receber'
@@ -48,12 +48,20 @@ def receber_mensagem():
         print(e)
         return jsonify({'EVENT_RECEIVED': 'error'}), 500
 
-
 @app.route('/json_files', methods=['GET'])
 def list_json_files():
     try:
         file_list = os.listdir(SAVE_DIR)
-        return jsonify({'files': file_list}), 200
+        file_urls = [request.url_root + 'json_files/' + file_name for file_name in file_list]
+        return jsonify({'files': file_urls}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({'EVENT_RECEIVED': 'error'}), 500
+
+@app.route('/json_files/<filename>', methods=['GET'])
+def get_json_file(filename):
+    try:
+        return send_from_directory(SAVE_DIR, filename)
     except Exception as e:
         print(e)
         return jsonify({'EVENT_RECEIVED': 'error'}), 500
