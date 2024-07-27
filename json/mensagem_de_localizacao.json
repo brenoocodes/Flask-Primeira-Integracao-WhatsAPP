@@ -1,0 +1,40 @@
+{
+    "entry": [
+      {
+        "changes": [
+          {
+            "field": "messages",
+            "value": {
+              "contacts": [
+                {
+                  "profile": {
+                    "name": "breno codes"
+                  },
+                  "wa_id": "553591319069"
+                }
+              ],
+              "messages": [
+                {
+                  "from": "553591319069",
+                  "id": "wamid.HBgMNTUzNTkxMzE5MDY5FQIAEhggNDhGMzc3NUFEN0YzRUZBNEZFOEIzMzBGOUFEN0IwRjMA",
+                  "location": {
+                    "latitude": -21.8779206,
+                    "longitude": -45.0906188
+                  },
+                  "timestamp": "1722114971",
+                  "type": "location"
+                }
+              ],
+              "messaging_product": "whatsapp",
+              "metadata": {
+                "display_phone_number": "15556085069",
+                "phone_number_id": "390557780803750"
+              }
+            }
+          }
+        ],
+        "id": "392565813934530"
+      }
+    ],
+    "object": "whatsapp_business_account"
+  }
