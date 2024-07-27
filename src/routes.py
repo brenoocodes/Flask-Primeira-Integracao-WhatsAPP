@@ -5,18 +5,29 @@ from flask import jsonify, request
 def home():
     return jsonify({'mensagem': 'API funcionando com sucesso'})
 
-@app.route('/whatsapp', methods=['POST'])
+@app.route('/whatsapp', methods=['GET', 'POST'])
 def get_whatsapp():
     try:
-        received = request.get_json()
-        print(received)
-        token = received['hub.verify_token']
-        challange = received['hub.challange']
+        if request.method == 'GET':
+            print('Método GET')
+            token = request.args.get('hub.verify_token')
+            challenge = request.args.get('hub.challenge')
 
-        if challange and token and token == verify_token:
-            return challange
-        else:
-            return jsonify({'mensagem': 'erro interno'}), 500
+            if challenge and token and token == verify_token:
+                return challenge
+            else:
+                return jsonify({'mensagem': 'erro interno'}), 500
+        
+        elif request.method == 'POST':
+            received = request.get_json()
+            print('Método POST')
+            token = received['hub.verify_token']
+            challenge = received['hub.challenge']
+
+            if challenge and token and token == verify_token:
+                return challenge
+            else:
+                return jsonify({'mensagem': 'erro interno'}), 500
 
     except Exception as e:
         print(e)
