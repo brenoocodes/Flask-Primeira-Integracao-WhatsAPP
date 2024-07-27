@@ -9,6 +9,7 @@ def home():
 def get_whatsapp():
     try:
         received = request.get_json()
+        print(received)
         token = received['hub.verify_token']
         challange = received['hub.challange']
 
