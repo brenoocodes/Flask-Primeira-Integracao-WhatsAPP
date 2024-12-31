@@ -1,19 +1,16 @@
 import requests
+import os
+from dotenv import load_dotenv
+load_dotenv()
+token = os.getenv("token")
 
-# URL da imagem
-url = "https://lookaside.fbsbx.com/whatsapp_business/attachments/?mid=335122459668803&ext=1722115948&hash=ATuRWe9vKC-eeFPwHIK1mXSBePtaS_lbg0sBlWbGmKjCIw"
+url = 'https://lookaside.fbsbx.com/whatsapp_business/attachments/?mid=1437882233585973&ext=1722187591&hash=ATuKRtd1VgVGtMmPsVDBLKQ0WEhqmHAoqSrwoyybSz8tLA'
+headers = {
+    f'Authorization': 'Bearer EAAz0WkTZCT5ABOZBJQUrdkBPE2CSirCfqqfH777eyFIZBtTsGek5mDURa5kOESWnoOw3FBfnsSRaBszTJla6gLAhJjtUTyLjyDTLC8UyDnCgJri9yWacFG54II3RHXYbzq2VXoTnUKjZC9C2tKePYSyfZB7yRlJpHqRr3HyBIiSGgvDPjRLcCHkJtzaDEvKIi3CU1yVOZAXh8hhsAoZBbrCzLoAUUAqpdoNp09Dq1sKmWQtvtciL2H3'
+}
 
-# Nome do arquivo para salvar
-filename = "imagem.jpg"
-
-# Fazendo o download da imagem
-response = requests.get(url)
-
-# Verificando se a solicitação foi bem-sucedida
-if response.status_code == 200:
-    # Salvando a imagem no disco
-    with open(filename, 'wb') as file:
-        file.write(response.content)
-    print(f"Imagem salva como {filename}")
-else:
-    print("Falha ao baixar a imagem:", response.status_code)
+response = requests.get(url, headers=headers)
+print(response)
+# Salvar a resposta em um arquivo
+with open('media_file.pdf', 'wb') as file:
+    file.write(response.content)
